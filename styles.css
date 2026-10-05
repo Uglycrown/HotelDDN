@@ -662,6 +662,112 @@ body.sheet-open { overflow: hidden; }
   .sheet-panel::before { display: none !important; }
 }
 
+
+/* ================= Mobile polish ================= */
+.swipe-hint { display: none; }
+@media (max-width: 760px) {
+  .section { padding: 3.6rem 16px; }
+  .section-head { margin-bottom: 2rem; }
+  .section-head h2 { font-size: 2.3rem; }
+  .swipe-hint { display: block; text-align: center; font-size: .78rem; color: var(--gold); margin: -1.2rem 0 1rem; letter-spacing: .04em; }
+
+  /* Hero: content on top, quick-book flows below it (no overlap) */
+  .hero { justify-content: flex-start; padding: calc(var(--nav-h) + 3vh) 0 20px; min-height: 100svh; }
+  .hero-content { padding: 0 16px; }
+  .hero h1 { font-size: clamp(2.2rem, 10vw, 2.9rem); margin-bottom: .7rem; }
+  .lead { font-size: .92rem; margin-bottom: 1.2rem; }
+  .hero-actions { flex-wrap: nowrap; gap: .5rem; }
+  .hero-actions .btn { flex: 1; padding: .75rem .6rem; font-size: .84rem; }
+  .quick-book {
+    position: relative; left: auto; bottom: auto; transform: none; margin: auto 16px 0; width: auto;
+    grid-template-columns: 1fr 1fr; gap: .7rem .8rem; padding: .9rem 1rem; border-radius: 18px;
+  }
+  .quick-book label:nth-child(3) { grid-column: auto; }
+  .quick-book .btn { grid-column: auto; padding: .7rem .5rem; font-size: .82rem; white-space: normal; line-height: 1.2; }
+  .hero-content { margin-bottom: 1.6rem; }
+  .video-toggle { top: auto; bottom: 192px; right: 16px; width: 34px; height: 34px; }
+
+  /* Stats: tighter */
+  .stats { gap: .7rem; padding: 1.8rem 16px .4rem; }
+  .stat { padding: 1rem .4rem; }
+  .stat b { font-size: 2rem; }
+  .stat span { font-size: .78rem; }
+
+  /* Rooms: horizontal swipe instead of a very long stack */
+  .room-grid {
+    display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px;
+    margin: 0 -16px; padding: 4px 16px 12px; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .room-grid::-webkit-scrollbar { display: none; }
+  .room { flex: 0 0 84%; scroll-snap-align: center; }
+  .room-body { padding: 0 1.1rem 1.2rem; }
+  .room-body h3 { font-size: 1.5rem; }
+  .price b { font-size: 1.4rem; }
+
+  /* 3D card */
+  .scene-card { margin: 0; height: 70svh; min-height: 440px; }
+
+  /* Dining: restaurants swipe, menu box goes edge-to-edge */
+  .restaurants {
+    display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px;
+    margin: 0 -16px 1.6rem; padding: 0 16px 6px; scrollbar-width: none;
+  }
+  .restaurants::-webkit-scrollbar { display: none; }
+  .resto { flex: 0 0 80%; min-height: 210px; scroll-snap-align: center; padding: 1.1rem; }
+  .resto h3 { font-size: 1.6rem; }
+  .menu-box { padding: 0; background: none; border: 0; backdrop-filter: none; -webkit-backdrop-filter: none; border-radius: 0; }
+  .menu-tabs {
+    position: sticky; top: var(--nav-h); z-index: 6; margin: 0 -16px .6rem; padding: .6rem 16px;
+    background: rgba(22,17,12,.96); border-bottom: 1px solid var(--border);
+  }
+  .menu-legend { gap: .4rem .9rem; font-size: .72rem; margin-bottom: .4rem; }
+  .allergy-box { padding: .8rem; }
+  .allergy-head b { width: 100%; }
+  .a-chip { padding: .35rem .65rem; font-size: .78rem; }
+  .dish { padding: .85rem 0; }
+  .dish h4 { font-size: 1.18rem; }
+  .dish p, .dish-foot, .dish-warn { margin-left: 1.3rem; padding-left: 0; }
+  .dish .dots-line { display: none; }
+  .dish-top { justify-content: space-between; }
+  .dish-top h4 { flex: 1; }
+  .menu-note { font-size: .74rem; }
+
+  /* Experiences: arrows sit beside the dots */
+  .coverflow { height: 440px; }
+
+  /* Amenities: compact 2-column grid */
+  .amenity-grid { grid-template-columns: 1fr 1fr; gap: .7rem; }
+  .amenity { padding: 1rem .9rem; }
+  .amenity .ico { width: 42px; height: 42px; font-size: 1.3rem; border-radius: 11px; margin-bottom: .6rem; }
+  .amenity h3 { font-size: .9rem; line-height: 1.3; }
+  .amenity p { font-size: .78rem; line-height: 1.45; }
+
+  /* Reviews */
+  .review p { font-size: 1.3rem; }
+
+  /* Booking */
+  .book-copy h2 { font-size: 2.3rem; }
+  .perks { font-size: .9rem; }
+  .book-form { padding: 1.1rem; gap: .8rem; }
+
+  /* Floating buttons: compact so they don't cover content */
+  .mobile-bar { left: auto; right: 12px; padding: .4rem .4rem .4rem 1rem; gap: .6rem; }
+  .mobile-bar b { font-size: 1.15rem; }
+  .mobile-bar .btn { padding: .6rem 1rem; font-size: .85rem; }
+  .cart-fab { left: auto; right: 12px; padding: .55rem .9rem .55rem .55rem; font-size: .88rem; }
+  .cart-fab b { font-size: 1.05rem; }
+  .cf-count { min-width: 26px; height: 26px; font-size: .78rem; }
+
+  /* Footer */
+  .footer { padding: 3rem 16px 6rem; }
+  .copy { font-size: .72rem; }
+}
+@media (max-width: 360px) {
+  .hero-actions { flex-wrap: wrap; }
+  .amenity-grid { grid-template-columns: 1fr; }
+  .stat b { font-size: 1.7rem; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   .reveal { opacity: 1; transform: none; }

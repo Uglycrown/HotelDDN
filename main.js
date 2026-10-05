@@ -93,16 +93,14 @@
 
   const mobileBar = $('#mobileBar');
   const bookSection = $('#book');
-  const sceneCard = $('#sceneCard');
+  const barSections = ['#stats', '#amenities'].map((id) => $(id));
   function onScroll() {
     const y = window.scrollY;
     nav.classList.toggle('scrolled', y > 40);
-    const bookTop = bookSection.getBoundingClientRect().top;
-    const bookBottom = bookSection.getBoundingClientRect().bottom;
-    const inBook = bookTop < window.innerHeight * 0.6 && bookBottom > 0;
-    const sr = sceneCard.getBoundingClientRect();
-    const in3D = sr.top < window.innerHeight && sr.bottom > 0;
-    mobileBar.classList.toggle('show', y > window.innerHeight * 0.7 && !inBook && !in3D);
+    // only show the booking pill over sections without their own bottom controls
+    const mid = window.innerHeight * 0.5;
+    const inSafe = barSections.some((el) => { const r = el.getBoundingClientRect(); return r.top < mid && r.bottom > mid; });
+    mobileBar.classList.toggle('show', y > window.innerHeight * 0.7 && inSafe);
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
