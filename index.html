@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0d0a07" />
+  <meta name="description" content="Aurora Grand Palace, Udaipur — a heritage luxury palace hotel on Lake Pichola. Royal suites, Ayurveda spa, Rajasthani dining and palace weddings." />
+  <title>Aurora Grand Palace Udaipur</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1695956353120-54ce5e91632b?w=1600&q=70" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Loader -->
+  <div class="loader" id="loader">
+    <div class="loader-mark">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 4c4 8 14 10 14 22a14 14 0 0 1-28 0C18 14 28 12 32 4Z" /><path d="M10 60V40h44v20" /><path d="M20 60V48a12 12 0 0 1 24 0v12" /></svg>
+    </div>
+    <div class="loader-name">Aurora <em>Grand</em></div>
+    <div class="loader-bar"><i id="loaderBar"></i></div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="nav" id="nav">
+    <a href="#home" class="brand">Aurora<span>Grand</span><small>Palace · Udaipur</small></a>
+    <nav class="nav-links" id="navLinks" aria-label="Main">
+      <a href="#rooms">Suites</a>
+      <a href="#palace3d">3D Palace</a>
+      <a href="#dining">Dining Menu</a>
+      <a href="#experiences">Experiences</a>
+      <a href="#amenities">Amenities</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+      <a href="#book" class="btn btn-gold nav-cta">Book Now</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- HERO: video -->
+  <section class="hero" id="home">
+    <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto"
+      poster="https://images.unsplash.com/photo-1695956353120-54ce5e91632b?w=1600&q=70"></video>
+    <div class="hero-shade"></div>
+
+    <div class="hero-content">
+      <p class="eyebrow">★★★★★ &nbsp;Heritage Palace Hotel · Lake Pichola</p>
+      <h1>A royal welcome<br /><em>on the lake of dreams.</em></h1>
+      <p class="lead">Live like Mewar royalty in a 250-year-old palace. Sunset boat rides, Ayurveda, candle-lit Rajasthani feasts, and suites with lake views.</p>
+      <div class="hero-actions">
+        <a href="#book" class="btn btn-gold">Reserve Your Stay</a>
+        <a href="#palace3d" class="btn btn-ghost">Explore Palace in 3D</a>
+      </div>
+    </div>
+
+    <!-- Quick booking bar -->
+    <form class="quick-book glass" id="quickBook">
+      <label><span>Check-in</span><input type="date" id="qbIn" /></label>
+      <label><span>Check-out</span><input type="date" id="qbOut" /></label>
+      <label><span>Guests</span>
+        <select id="qbGuests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
+      </label>
+      <button class="btn btn-gold" type="submit">Check Availability</button>
+    </form>
+
+    <button class="video-toggle" id="videoToggle" aria-label="Pause video">❚❚</button>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats" id="stats">
+    <div class="stat reveal"><b data-count="1776">0</b><span>Palace built</span></div>
+    <div class="stat reveal"><b data-count="86">0</b><span>Royal rooms &amp; suites</span></div>
+    <div class="stat reveal"><b data-count="5">0</b><span>Restaurants &amp; bars</span></div>
+    <div class="stat reveal"><b data-count="4.9" data-decimals="1">0</b><span>Guest rating</span></div>
+  </section>
+
+  <!-- Rooms -->
+  <section class="section" id="rooms">
+    <div class="section-head reveal">
+      <p class="eyebrow">Stay</p>
+      <h2>Rooms &amp; Royal Suites</h2>
+      <p class="muted">Hand-painted frescoes, marble jharokhas and carved silver doors, with modern comforts like a mobile key and smart controls.</p>
+    </div>
+    <div class="room-grid" id="roomGrid"></div>
+  </section>
+
+  <!-- 3D Palace -->
+  <section class="section palace-section" id="palace3d">
+    <div class="section-head reveal">
+      <p class="eyebrow">Interactive</p>
+      <h2>Explore the Palace in 3D</h2>
+      <p class="muted">Swipe to rotate. Tap a golden marker or a button below to fly to that part of the palace.</p>
+    </div>
+    <div class="scene-card reveal" id="sceneCard">
+      <canvas id="scene" aria-label="Interactive 3D model of the Aurora Grand Palace"></canvas>
+      <div class="hotspot-layer" id="hotspotLayer"></div>
+      <div class="scene-hint" id="sceneHint"><span>👆</span> Drag to rotate</div>
+
+      <div class="info-card" id="infoCard" hidden>
+        <button class="info-close" id="infoClose" aria-label="Close">×</button>
+        <h3 id="infoTitle"></h3>
+        <p id="infoText"></p>
+      </div>
+
+      <div class="scene-tools">
+        <button class="tool" id="dayNight" aria-label="Switch to night">🌙</button>
+        <button class="tool" id="autoRotate" aria-label="Toggle auto rotation">⟳</button>
+      </div>
+
+      <div class="chips-wrap">
+        <button class="chips-arrow" data-dir="-1" aria-label="Previous place">‹</button>
+        <div class="chips" id="chips">
+          <button class="chip active" data-view="overview">🏰 Overview</button>
+          <button class="chip" data-view="durbar">👑 Durbar Hall</button>
+          <button class="chip" data-view="suites">🛏 Royal Suites</button>
+          <button class="chip" data-view="pool">💧 Courtyard Pool</button>
+          <button class="chip" data-view="spa">🌿 Ayurveda Spa</button>
+          <button class="chip" data-view="dining">🍽 Lake Terrace</button>
+          <button class="chip" data-view="ghat">⛵ Boat Jetty</button>
+        </div>
+        <button class="chips-arrow" data-dir="1" aria-label="Next place">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dining Menu -->
+  <section class="section alt" id="dining">
+    <div class="section-head reveal">
+      <p class="eyebrow">Dining</p>
+      <h2>The Royal Menu</h2>
+      <p class="muted">Recipes from the royal kitchens of Mewar, made with spices from local mandis and herbs from our palace garden.</p>
+    </div>
+
+    <div class="restaurants">
+      <article class="resto reveal" style="--img:url('https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&q=70')">
+        <div><span>Royal Rajasthani · Dinner</span><h3>Darbar</h3><p>Candle-lit thali dining under 18th-century chandeliers.</p></div>
+      </article>
+      <article class="resto reveal" style="--img:url('https://images.unsplash.com/photo-1767114915989-c6ab3c8fc42e?w=800&q=70')">
+        <div><span>Tandoor &amp; Grills · Lakeside</span><h3>Jharokha Terrace</h3><p>Live tandoor and sunset views over Lake Pichola.</p></div>
+      </article>
+      <article class="resto reveal" style="--img:url('https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=800&q=70')">
+        <div><span>All-Day · Pan-Indian</span><h3>Saffron Courtyard</h3><p>Dosas, chaats and filter coffee from dawn to midnight.</p></div>
+      </article>
+    </div>
+
+    <div class="menu-box glass reveal">
+      <div class="menu-tabs" id="menuTabs" role="tablist"></div>
+      <div class="menu-legend"><span><i class="veg"></i>Veg</span><span><i class="nonveg"></i>Non-veg</span><span>⭐ Chef's special</span></div>
+      <div class="menu-list" id="menuList" role="tabpanel"></div>
+      <p class="menu-note">Prices in ₹ and exclusive of 5% GST. Tell our team about any allergies. Jain and vegan options are available on request.</p>
+    </div>
+  </section>
+
+  <!-- Experiences: 3D coverflow carousel -->
+  <section class="section" id="experiences">
+    <div class="section-head reveal">
+      <p class="eyebrow">Discover</p>
+      <h2>Royal Experiences</h2>
+      <p class="muted">Swipe, drag or use the arrows.</p>
+    </div>
+    <div class="coverflow" id="coverflow">
+      <div class="cf-stage" id="cfStage"></div>
+      <button class="cf-btn prev" id="cfPrev" aria-label="Previous experience">‹</button>
+      <button class="cf-btn next" id="cfNext" aria-label="Next experience">›</button>
+    </div>
+    <div class="dots" id="cfDots"></div>
+  </section>
+
+  <!-- Amenities -->
+  <section class="section alt" id="amenities">
+    <div class="section-head reveal">
+      <p class="eyebrow">Royal Living</p>
+      <h2>Amenities &amp; Services</h2>
+    </div>
+    <div class="amenity-grid">
+      <article class="amenity reveal"><div class="ico">🪷</div><h3>Ayurveda &amp; Yoga</h3><p>Kerala-trained vaidyas, Abhyanga and Shirodhara, and sunrise yoga on the lake terrace.</p></div>
+      <article class="amenity reveal"><div class="ico">🤵</div><h3>Royal Butler</h3><p>A personal khidmatgar for every suite, on call 24×7.</p></div>
+      <article class="amenity reveal"><div class="ico">⛵</div><h3>Boat Transfers</h3><p>Private boat from the City Palace jetty to the hotel steps.</p></div>
+      <article class="amenity reveal"><div class="ico">💍</div><h3>Palace Weddings</h3><p>Lakeside mandaps, mehendi in the courtyard and baraat on vintage cars.</p></div>
+      <article class="amenity reveal"><div class="ico">🚘</div><h3>Vintage Car Rides</h3><p>Tour the old city in a restored 1940s royal convertible.</p></div>
+      <article class="amenity reveal"><div class="ico">✈️</div><h3>Airport Pick-up</h3><p>Complimentary transfers from Maharana Pratap Airport for suite guests.</p></div>
+      <article class="amenity reveal"><div class="ico">📱</div><h3>Mobile Key &amp; Smart Rooms</h3><p>Your phone opens the door and controls the lights, AC and curtains.</p></div>
+      <article class="amenity reveal"><div class="ico">📶</div><h3>Free High-speed Wi-Fi</h3><p>Fibre internet throughout the palace and a quiet work lounge.</p></div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="section" id="reviews">
+    <div class="section-head reveal">
+      <p class="eyebrow">Guest Stories</p>
+      <h2>Atithi Devo Bhava</h2>
+      <p class="muted">"The guest is God." Hear it from our guests.</p>
+    </div>
+    <div class="review-slider">
+      <button class="rv-btn prev" id="rvPrev" aria-label="Previous review">‹</button>
+      <div class="review-viewport" id="reviewViewport">
+        <div class="review-track" id="reviewTrack">
+          <blockquote class="review"><div class="stars">★★★★★</div><p>“We had our wedding here and it was magical. The lakeside mandap, the fireworks, the food. Our families still talk about it.”</p><cite>— Ananya &amp; Rohan, Mumbai</cite></blockquote>
+          <blockquote class="review"><div class="stars">★★★★★</div><p>“Waking up to Lake Pichola from the Jharokha Suite is unforgettable. The butler arranged a private sunset boat for my parents' anniversary.”</p><cite>— Rajiv M., New Delhi</cite></blockquote>
+          <blockquote class="review"><div class="stars">★★★★★</div><p>“The Darbar thali is the best Rajasthani meal I've had. The Ayurveda massage was pure bliss.”</p><cite>— Priya S., Bengaluru</cite></blockquote>
+          <blockquote class="review"><div class="stars">★★★★★</div><p>“The service felt genuinely warm, and the palace glowing at night is a sight I'll never forget.”</p><cite>— Emily C., London</cite></blockquote>
+        </div>
+      </div>
+      <button class="rv-btn next" id="rvNext" aria-label="Next review">›</button>
+    </div>
+    <div class="dots" id="reviewDots"></div>
+  </section>
+
+  <!-- Booking -->
+  <section class="section alt" id="book">
+    <div class="book-wrap">
+      <div class="book-copy reveal">
+        <p class="eyebrow">Reservations</p>
+        <h2>Book Your Royal Stay</h2>
+        <p class="muted">Get our best rate when you book direct. Free cancellation up to 72 hours before arrival. Pay at the hotel with UPI, cards or net banking.</p>
+        <ul class="perks">
+          <li>✓ Breakfast at Saffron Courtyard included</li>
+          <li>✓ Welcome aarti, tilak and garland on arrival</li>
+          <li>✓ Free sunset boat ride on stays of 3+ nights</li>
+          <li>✓ Late check-out until 2 PM</li>
+        </ul>
+      </div>
+      <form class="book-form glass reveal" id="bookForm" novalidate>
+        <div class="row">
+          <label>Check-in<input type="date" id="checkIn" required /></label>
+          <label>Check-out<input type="date" id="checkOut" required /></label>
+        </div>
+        <div class="row">
+          <label>Guests
+            <select id="guests">
+              <option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
+            </select>
+          </label>
+          <label>Room<select id="roomType"></select></label>
+        </div>
+        <label>Full name<input type="text" id="name" placeholder="Your name" required autocomplete="name" /></label>
+        <div class="row">
+          <label>Email<input type="email" id="email" placeholder="you@example.com" required autocomplete="email" /></label>
+          <label>Mobile<input type="tel" id="phone" placeholder="+91 98XXX XXXXX" autocomplete="tel" inputmode="tel" /></label>
+        </div>
+        <div class="summary" id="summary">
+          <div><span id="sumNights">0 nights</span><span id="sumBase">₹0</span></div>
+          <div><span>GST (18%)</span><span id="sumTax">₹0</span></div>
+          <div class="total"><span>Total</span><span id="sumTotal">₹0</span></div>
+        </div>
+        <button class="btn btn-gold btn-block" type="submit">Request Reservation</button>
+        <p class="form-msg" id="formMsg" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Contact / Footer -->
+  <footer class="footer" id="contact">
+    <div class="footer-grid">
+      <div>
+        <a href="#home" class="brand">Aurora<span>Grand</span><small>Palace · Udaipur</small></a>
+        <p class="muted">Lake Pichola, Old City<br />Udaipur, Rajasthan 313001, India<br />Reception and concierge open 24×7</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p><a href="tel:+912940000000">+91 294 000 0000</a><br /><a href="mailto:stay@auroragrand.example">stay@auroragrand.example</a></p>
+        <h4 class="mt">Getting here</h4>
+        <p class="muted">Maharana Pratap Airport is 25 km away. Udaipur City railway station is 4 km away.</p>
+      </div>
+      <div>
+        <h4>Newsletter</h4>
+        <p class="muted">Festive offers for Diwali, Holi and the wedding season.</p>
+        <form class="news" id="newsForm">
+          <input type="email" placeholder="Email address" required aria-label="Email address" />
+          <button class="btn btn-gold" type="submit">Join</button>
+        </form>
+      </div>
+    </div>
+    <p class="copy">© <span id="year"></span> Aurora Grand Palace, Udaipur. All rights reserved. · Photos: Unsplash · Video: Pexels</p>
+  </footer>
+
+  <!-- Mobile sticky booking bar -->
+  <div class="mobile-bar" id="mobileBar">
+    <div><small>From</small><b>₹18,500</b><small>/night</small></div>
+    <a href="#book" class="btn btn-gold">Book Now</a>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="scene.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
