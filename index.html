@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="preload" as="image" href="https://images.unsplash.com/photo-1695956353120-54ce5e91632b?w=1600&q=70" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=4" />
 </head>
 <body>
   <!-- Loader -->
@@ -131,7 +131,7 @@
     <div class="section-head reveal">
       <p class="eyebrow">Dining</p>
       <h2>The Royal Menu</h2>
-      <p class="muted">Recipes from the royal kitchens of Mewar, made with spices from local mandis and herbs from our palace garden.</p>
+      <p class="muted">Recipes from the royal kitchens of Mewar, made with spices from local mandis and herbs from our palace garden. Order to your table or room, and tell the chef how you like it.</p>
     </div>
 
     <div class="restaurants">
@@ -146,11 +146,31 @@
       </article>
     </div>
 
-    <div class="menu-box glass reveal">
+    <div class="menu-box glass reveal" id="menuBox">
+      <div class="menu-toolbar">
+        <div class="menu-search">
+          <span aria-hidden="true">🔍</span>
+          <input type="search" id="menuSearch" placeholder="Search dishes such as biryani, paneer, kulfi" aria-label="Search the menu" />
+        </div>
+        <div class="menu-actions">
+          <button class="btn btn-ghost btn-sm" id="lastReceiptBtn" type="button" hidden>🧾 Last receipt</button>
+          <button class="btn btn-gold btn-sm" id="openCartBtn" type="button">🧺 My order <span class="badge" id="cartBadge">0</span></button>
+        </div>
+      </div>
+
+      <div class="allergy-box">
+        <div class="allergy-head">
+          <b>⚠️ Any food allergies?</b>
+          <span class="muted">Select all that apply. We'll flag those dishes and alert the kitchen.</span>
+        </div>
+        <div class="allergy-chips" id="allergyChips"></div>
+        <label class="switch"><input type="checkbox" id="hideAllergens" /><span class="track"><i></i></span> Hide dishes that contain my allergens</label>
+      </div>
+
       <div class="menu-tabs" id="menuTabs" role="tablist"></div>
-      <div class="menu-legend"><span><i class="veg"></i>Veg</span><span><i class="nonveg"></i>Non-veg</span><span>⭐ Chef's special</span></div>
+      <div class="menu-legend"><span><i class="veg"></i>Veg</span><span><i class="nonveg"></i>Non-veg</span><span>⭐ Chef's special</span><span>🌶 Spice adjustable</span></div>
       <div class="menu-list" id="menuList" role="tabpanel"></div>
-      <p class="menu-note">Prices in ₹ and exclusive of 5% GST. Tell our team about any allergies. Jain and vegan options are available on request.</p>
+      <p class="menu-note">Prices in ₹. 5% GST is added at checkout. Tap <b>Add</b> on a dish to choose its spice level and cooking style and leave notes for the chef.</p>
     </div>
   </section>
 
@@ -283,10 +303,43 @@
     <a href="#book" class="btn btn-gold">Book Now</a>
   </div>
 
+  <!-- Floating order button -->
+  <button class="cart-fab" id="cartFab" type="button" hidden>
+    <span class="cf-count" id="fabCount">0</span><span>View order</span><b id="fabTotal">₹0</b>
+  </button>
+
+  <!-- Dish customisation sheet -->
+  <div class="sheet" id="dishSheet" role="dialog" aria-modal="true" aria-labelledby="dsTitle" hidden>
+    <div class="sheet-backdrop" data-close></div>
+    <div class="sheet-panel">
+      <button class="sheet-close" data-close aria-label="Close">×</button>
+      <div id="dishSheetBody"></div>
+    </div>
+  </div>
+
+  <!-- Order / checkout sheet -->
+  <div class="sheet" id="cartSheet" role="dialog" aria-modal="true" aria-labelledby="csTitle" hidden>
+    <div class="sheet-backdrop" data-close></div>
+    <div class="sheet-panel wide">
+      <button class="sheet-close" data-close aria-label="Close">×</button>
+      <div id="cartSheetBody"></div>
+    </div>
+  </div>
+
+  <!-- Receipt sheet -->
+  <div class="sheet" id="receiptSheet" role="dialog" aria-modal="true" aria-labelledby="rcTitle" hidden>
+    <div class="sheet-backdrop" data-close></div>
+    <div class="sheet-panel receipt-panel">
+      <button class="sheet-close no-print" data-close aria-label="Close">×</button>
+      <div id="receiptBody"></div>
+    </div>
+  </div>
+
   <div class="toast" id="toast" role="status"></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="scene.js"></script>
-  <script src="main.js"></script>
+  <script src="scene.js?v=4"></script>
+  <script src="main.js?v=4"></script>
+  <script src="order.js?v=4"></script>
 </body>
 </html>

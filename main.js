@@ -28,53 +28,6 @@
     { cat: 'Sister Resort', title: 'Kerala Backwaters', text: 'Extend your journey on our private houseboat in Alleppey.', price: 'From ₹32,000', img: '1602216056096-3b40cc0c9944' },
   ];
 
-  const MENU = {
-    'Breakfast': [
-      { n: 'Poha & Jalebi', d: 'Indori-style flattened rice with sev and pomegranate, served with saffron jalebi', p: 650, v: 1 },
-      { n: 'Masala Dosa', d: 'Crisp rice crêpe, potato masala, sambar and three chutneys', p: 750, v: 1 },
-      { n: 'Aloo Paratha Platter', d: 'Tandoor-baked parathas with white butter, curd and achaar', p: 700, v: 1 },
-      { n: 'Pyaaz Kachori', d: 'A Rajasthani street-food classic with tamarind chutney', p: 550, v: 1, s: 1 },
-      { n: 'Parsi Akuri on Toast', d: 'Spiced scrambled eggs with green chilli and coriander', p: 800, v: 0 },
-      { n: 'Masala Chai Service', d: 'Our house blend brewed with ginger, cardamom and fresh milk', p: 350, v: 1 },
-    ],
-    'Rajasthani Royal': [
-      { n: 'Laal Maas', d: 'The fiery Mewari mutton curry with mathania chillies, slow-cooked for six hours', p: 2450, v: 0, s: 1 },
-      { n: 'Dal Baati Churma', d: 'Baked wheat dumplings, five-lentil dal and sweet churma with ghee', p: 1350, v: 1, s: 1 },
-      { n: 'Gatte ki Sabzi', d: 'Gram-flour dumplings in a tangy yoghurt curry', p: 1150, v: 1 },
-      { n: 'Ker Sangri', d: 'Desert berries and beans tempered with dry spices', p: 1100, v: 1 },
-      { n: 'Safed Maas', d: 'Royal white mutton curry with cashew, cream and cardamom', p: 2350, v: 0 },
-      { n: 'Royal Thali (21 dishes)', d: 'A full royal spread served on silver, with unlimited refills', p: 4200, v: 1 },
-    ],
-    'Tandoor': [
-      { n: 'Paneer Tikka Ajwaini', d: 'Cottage cheese marinated in carom and hung curd', p: 1250, v: 1 },
-      { n: 'Murgh Malai Tikka', d: 'Chicken in cream cheese, cardamom and mace', p: 1450, v: 0 },
-      { n: 'Tandoori Jhinga', d: 'Jumbo prawns with Kashmiri chilli and garlic', p: 2650, v: 0, s: 1 },
-      { n: 'Bhutte ke Kebab', d: 'Corn and green pea kebabs with mint chutney', p: 1050, v: 1 },
-      { n: 'Raan-e-Aurora', d: 'Whole leg of lamb braised overnight and finished in the tandoor (serves 2)', p: 4800, v: 0 },
-      { n: 'Breads Basket', d: 'Butter naan, laccha paratha, missi roti and garlic kulcha', p: 600, v: 1 },
-    ],
-    'Coastal & South': [
-      { n: 'Kerala Meen Curry', d: 'Kingfish in a kokum and coconut gravy with appam', p: 1950, v: 0 },
-      { n: 'Chettinad Chicken', d: 'Black pepper and stone-ground spice masala', p: 1650, v: 0 },
-      { n: 'Avial with Red Rice', d: 'Mixed vegetables in coconut and curd, Kerala style', p: 1150, v: 1 },
-      { n: 'Goan Prawn Balchão', d: 'Tangy, spicy prawn pickle curry with poi bread', p: 2100, v: 0, s: 1 },
-      { n: 'Sadya Bites', d: 'Olan, thoran and pachadi served on banana leaf', p: 1250, v: 1 },
-    ],
-    'Desserts': [
-      { n: 'Ghevar with Rabri', d: 'A honeycomb disc of Rajasthani festive sweet with saffron rabri', p: 750, v: 1, s: 1 },
-      { n: 'Kesar Pista Kulfi', d: 'Slow-reduced milk ice cream with falooda', p: 650, v: 1 },
-      { n: 'Gulab Jamun Brûlée', d: 'Warm gulab jamun under a crackling sugar crust', p: 700, v: 1 },
-      { n: 'Moong Dal Halwa', d: 'Rich, ghee-roasted lentil halwa with almonds', p: 650, v: 1 },
-    ],
-    'Beverages': [
-      { n: 'Rose & Saffron Thandai', d: 'Chilled milk with nuts, fennel and rose petals', p: 550, v: 1 },
-      { n: 'Nimbu Soda', d: 'Fresh lime, sweet or salted, with roasted cumin', p: 350, v: 1 },
-      { n: 'Filter Coffee', d: 'Kumbakonam degree coffee served in a dabarah', p: 400, v: 1 },
-      { n: 'Mango Lassi', d: 'Alphonso mango blended with thick curd', p: 450, v: 1 },
-      { n: 'The Maharana', d: 'Signature cocktail of Indian gin, kokum, tulsi and tonic', p: 1200, v: 1, s: 1 },
-    ],
-  };
-
   /* ---------- Toast ---------- */
   const toastEl = $('#toast');
   let toastTimer;
@@ -231,27 +184,6 @@
       card.addEventListener('mouseleave', () => { card.style.transform = ''; });
     });
   }
-
-  /* ---------- Dining menu tabs ---------- */
-  const tabs = $('#menuTabs'), list = $('#menuList');
-  const cats = Object.keys(MENU);
-  tabs.innerHTML = cats.map((c, i) => `<button class="menu-tab${i ? '' : ' active'}" role="tab" aria-selected="${!i}" data-cat="${c}">${c}</button>`).join('');
-  function renderMenu(cat) {
-    list.innerHTML = MENU[cat].map((d) => `
-      <div class="dish">
-        <div class="dish-top"><i class="${d.v ? 'veg' : 'nonveg'}" title="${d.v ? 'Vegetarian' : 'Non-vegetarian'}"></i><h4>${d.n}${d.s ? ' ⭐' : ''}</h4><span class="dots-line"></span><span class="amt">${inr(d.p)}</span></div>
-        <p>${d.d}</p>
-      </div>`).join('');
-    list.classList.remove('fade'); void list.offsetWidth; list.classList.add('fade');
-  }
-  tabs.addEventListener('click', (e) => {
-    const b = e.target.closest('.menu-tab');
-    if (!b) return;
-    $$('.menu-tab', tabs).forEach((t) => { t.classList.toggle('active', t === b); t.setAttribute('aria-selected', String(t === b)); });
-    b.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-    renderMenu(b.dataset.cat);
-  });
-  renderMenu(cats[0]);
 
   /* ---------- Pointer swipe helper (touch + mouse) ---------- */
   function swipeable(el, { onMove, onEnd }) {
@@ -473,7 +405,7 @@
         if (c) countUp(c);
         io.unobserve(en.target);
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
     $$('.reveal').forEach((el, i) => { el.style.transitionDelay = (i % 4) * 80 + 'ms'; io.observe(el); });
   } else {
     $$('.reveal').forEach((el) => el.classList.add('in'));
